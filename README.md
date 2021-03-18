@@ -62,7 +62,7 @@ just remove the `previous_signature.bin` file.
 
 ## build
 
-To build the project you need the development files for libcurl and OpenSSL.
+To build the project you need the development files for libcurl and OpenSSL (e.g. in recent debian `libcurl4-openssl-dev` and  `libssl-dev`).
 
 ```bash
 git clone https://github.com/ubirch/ubirch-client-c-example --recursive

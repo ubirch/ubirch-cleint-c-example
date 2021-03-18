@@ -43,9 +43,8 @@ static size_t response_callback(void *data, size_t size, size_t nmemb, void *use
 }
 
 
-int ubirch_send(const char* url, const configuration_t* config,
-        const unsigned char *data, const size_t len, int* http_status,
-        msgpack_unpacker* unpacker) {
+int ubirch_send(const char* url, const unsigned char *data, const size_t len,
+        long* http_status, msgpack_unpacker* unpacker) {
     unsigned int ii;
     DEBUGHEXDUMP("Sending UPP:", data, len);
 
@@ -112,7 +111,7 @@ int ubirch_send(const char* url, const configuration_t* config,
     }
     curl_global_cleanup();
 
-    if (response_context.verified) {
+    if (response_context.verified || unpacker == NULL) {
         return UBIRCH_SEND_OK;
     } else {
         return UBIRCH_SEND_VERIFICATION_FAILED;

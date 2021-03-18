@@ -242,21 +242,22 @@ static void print_config_value_base64(const char* name, unsigned char* buffer,
 void print_config(void) {
     // convert configuration values into readable data
     printf("== configuration ==\n");
-    print_config_uuid();
-    print_config_value_base64("private key", configuration.private_key,
-            configuration.private_key_bit,
-            UBIRCH_CLIENT_CONFIG_PRIVATE_KEY_LENGTH);
-    print_config_value_base64("public key", configuration.public_key,
-            configuration.public_key_bit,
-            UBIRCH_CLIENT_CONFIG_PUBLIC_KEY_LENGTH);
-    print_config_value_base64("server key", configuration.server_key,
-            configuration.server_key_bit,
-            UBIRCH_CLIENT_CONFIG_SERVER_KEY_LENGTH);
-    print_config_authtoken();
+    if (load_config() == 0) {
+        print_config_uuid();
+        print_config_value_base64("public key", configuration.public_key,
+                configuration.public_key_bit,
+                UBIRCH_CLIENT_CONFIG_PUBLIC_KEY_LENGTH);
+        print_config_value_base64("server key", configuration.server_key,
+                configuration.server_key_bit,
+                UBIRCH_CLIENT_CONFIG_SERVER_KEY_LENGTH);
+        print_config_authtoken();
+    } else {
+        printf("No config file present.\n");
+    }
 }
 
 void print_previous_signature(void) {
-    printf("== last successfully anchored signature ==\n");
+    printf("== signature of last successfully anchored hash ==\n");
     unsigned char buffer[UBIRCH_PROTOCOL_SIGN_SIZE];
     if (read_data_from_file(UBIRCH_CLIENT_PREVIOUS_SIGNATURE_FILE, buffer,
                 UBIRCH_PROTOCOL_SIGN_SIZE) == 0) {
