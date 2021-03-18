@@ -45,9 +45,10 @@ just remove the `previous_signature.bin` file.
 1. Generate a new **uuid** (e.g. with `uuidgen`). Log into the [ubirch console](https://console.prod.ubirch.com/home) and add a new "Thing" with the **uuid**.
 2. Get the password string (aka **authtoken**) from "ThingsSettings" -> apiConfig -> *password*.
 3. Configure your client:
-    * Set **uuid**: `ubirch-client config 01234567-89ab-cdef-0123-456789abcdef` (replace with your **uuid**).
-    * Set **authtoken**: `ubirch-client config fedcba98-7654-3210-fedc-ba9876543210` (replace with your **authtoken**).
+    * Set **uuid**: `ubirch-client config uuid 01234567-89ab-cdef-0123-456789abcdef` (replace with your **uuid**).
+    * Set **authtoken**: `ubirch-client config authtoken fedcba98-7654-3210-fedc-ba9876543210` (replace with your **authtoken**).
     * Generate new key pair: `ubirch-client generatekeys`.
+    * Set public key of the backend to verify the response: `ubirch-client config serverkey 74BIrQbAKFrwF3AJOBgwxGzsAl0B2GCF51pPAEHC5pA=`.
 4. Register the keys: `ubirch-client register`. You should now be able to
    find your public key (type `ubirch-client info` to get it) in ubirch console -> Things -> PublicKeys.
 5. Anchor the hash of a file of your choise: `ubirch-client send my_file.xyz`.
