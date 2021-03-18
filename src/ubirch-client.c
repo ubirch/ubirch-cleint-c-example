@@ -222,10 +222,9 @@ int main(int argc, char* argv[]) {
 
 
         /* send data to backend */
-        int http_status = -1;
+        long http_status = -1;
         int return_value = -1;
-        switch (ubirch_send(url, config, upp->data, upp->size, &http_status,
-                    unpacker)) {
+        switch (ubirch_send(url, upp->data, upp->size, &http_status, unpacker)) {
             case UBIRCH_SEND_OK:
                 switch (http_status) {
                     case 200:
@@ -248,7 +247,7 @@ int main(int argc, char* argv[]) {
                         }
                         break;
                     default:
-                        printf("https status: %d, something went wrong...\n",
+                        printf("https status: %ld, something went wrong...\n",
                                 http_status);
                         break;
                 }
