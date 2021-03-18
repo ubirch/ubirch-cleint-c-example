@@ -103,6 +103,7 @@ int main(int argc, char* argv[]) {
         exit(0);
     } else if (argc == 2 && strcmp(argv[1], "generatekeys") == 0) {
         /* generate new keypair and write it to config file */
+        load_config();
         configuration_t* config = get_config();
         crypto_sign_keypair(config->public_key, config->private_key);
         config->public_key_bit = 1;
