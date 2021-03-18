@@ -253,7 +253,7 @@ void print_config(void) {
 }
 
 void print_previous_signature(void) {
-    printf("== last successfully anchored signature ==\n");
+    printf("== signature of last successfully anchored hash ==\n");
     unsigned char buffer[UBIRCH_PROTOCOL_SIGN_SIZE];
     if (read_data_from_file(UBIRCH_CLIENT_PREVIOUS_SIGNATURE_FILE, buffer,
                 UBIRCH_PROTOCOL_SIGN_SIZE) == 0) {
