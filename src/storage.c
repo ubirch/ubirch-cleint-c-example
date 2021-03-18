@@ -243,9 +243,6 @@ void print_config(void) {
     // convert configuration values into readable data
     printf("== configuration ==\n");
     print_config_uuid();
-    print_config_value_base64("private key", configuration.private_key,
-            configuration.private_key_bit,
-            UBIRCH_CLIENT_CONFIG_PRIVATE_KEY_LENGTH);
     print_config_value_base64("public key", configuration.public_key,
             configuration.public_key_bit,
             UBIRCH_CLIENT_CONFIG_PUBLIC_KEY_LENGTH);
