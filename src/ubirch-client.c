@@ -171,7 +171,8 @@ int main(int argc, char* argv[]) {
             mbedtls_sha512_starts(&ctx, 0);
             int c; // int, not char, to handle EOF
             while ((c = fgetc(fileptr)) != EOF) {
-                mbedtls_sha512_update(&ctx, (unsigned char*)&c, 1);
+                unsigned char val = c;
+                mbedtls_sha512_update(&ctx, &val, 1);
             }
             mbedtls_sha512_finish(&ctx, sha512sum);
             if (ferror(fileptr) || !feof(fileptr)) {
