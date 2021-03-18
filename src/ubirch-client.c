@@ -114,6 +114,16 @@ int main(int argc, char* argv[]) {
         }
         printf("OK\n");
         exit(0);
+    } else if (argc == 2 && strcmp(argv[1], "info") == 0) {
+        /* print out some usefull information */
+        printf("== ubirch-client ==\n");
+        printf("backend data url: %s\n", CONFIG_UBIRCH_BACKEND_DATA_URL);
+        printf("backend key server url: %s\n\n", CONFIG_UBIRCH_BACKEND_KEY_SERVER_URL);
+        print_config();
+        printf("\n");
+        print_previous_signature();
+        printf("\n");
+        exit(0);
     }
 
     /* load configuration from file
@@ -124,17 +134,7 @@ int main(int argc, char* argv[]) {
         exit(-1);
     }
 
-    if (argc == 2 && strcmp(argv[1], "info") == 0) {
-        /* print out some usefull information */
-        printf("== ubirch-client ==\n");
-        printf("backend data url: %s\n", CONFIG_UBIRCH_BACKEND_DATA_URL);
-        printf("backend key server url: %s\n\n", CONFIG_UBIRCH_BACKEND_KEY_SERVER_URL);
-        print_config();
-        printf("\n");
-        print_previous_signature();
-        printf("\n");
-        exit(0);
-    } else if ((argc == 3 && strcmp(argv[1], "send") == 0)
+    if ((argc == 3 && strcmp(argv[1], "send") == 0)
             || (argc == 2 && strcmp(argv[1], "register") == 0)) {
         /* register your keys or send hash of given file path */
 

@@ -242,14 +242,18 @@ static void print_config_value_base64(const char* name, unsigned char* buffer,
 void print_config(void) {
     // convert configuration values into readable data
     printf("== configuration ==\n");
-    print_config_uuid();
-    print_config_value_base64("public key", configuration.public_key,
-            configuration.public_key_bit,
-            UBIRCH_CLIENT_CONFIG_PUBLIC_KEY_LENGTH);
-    print_config_value_base64("server key", configuration.server_key,
-            configuration.server_key_bit,
-            UBIRCH_CLIENT_CONFIG_SERVER_KEY_LENGTH);
-    print_config_authtoken();
+    if (load_config() == 0) {
+        print_config_uuid();
+        print_config_value_base64("public key", configuration.public_key,
+                configuration.public_key_bit,
+                UBIRCH_CLIENT_CONFIG_PUBLIC_KEY_LENGTH);
+        print_config_value_base64("server key", configuration.server_key,
+                configuration.server_key_bit,
+                UBIRCH_CLIENT_CONFIG_SERVER_KEY_LENGTH);
+        print_config_authtoken();
+    } else {
+        printf("No config file present.\n");
+    }
 }
 
 void print_previous_signature(void) {
